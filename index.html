@@ -74,6 +74,32 @@ button {
   color: white;
 }
 
+.mode-btn {
+  padding: 10px 28px;
+  border-radius: 30px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  background: transparent;
+  color: white;
+  transition: 0.3s ease;
+  min-width: 110px;
+}
+
+.mode-btn.active {
+  background: linear-gradient(45deg, #00c853, #64dd17);
+}
+
+.mode-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.mode-btn:active {
+  transform: scale(0.95);
+}
+
+
+
 .plus {
   background: linear-gradient(45deg, #00c853, #64dd17);
 }
@@ -156,6 +182,12 @@ button:active {
 
 <h1>🤖 Robotic Arm Control Panel</h1>
 
+  <div class="mode-bar">
+  <button id="autoBtn" class="mode-btn active" onclick="setMode('auto')">AUTO</button>
+  <button id="manualBtn" class="mode-btn" onclick="setMode('manual')">MANUAL</button>
+</div>
+
+
 <div class="container">
 
   <div class="column">
@@ -198,7 +230,7 @@ button:active {
 <script>
 
 // 🔹 Change to your MQTT WebSocket broker
-const broker = "ws://broker.hivemq.com:8000/mqtt";
+const broker = "wss://broker.hivemq.com:8000/mqtt";
 
 const client = mqtt.connect(broker);
 
@@ -210,7 +242,30 @@ client.on("error", function () {
   document.getElementById("status").innerText = "❌ Connection Error";
 });
 
+let currentMode = "auto";
+
+function setMode(mode) {
+  currentMode = mode;
+
+  document.getElementById("autoBtn").classList.remove("active");
+  document.getElementById("manualBtn").classList.remove("active");
+
+  if (mode === "auto") {
+    document.getElementById("autoBtn").classList.add("active");
+  } else {
+    document.getElementById("manualBtn").classList.add("active");
+  }
+
+  console.log("Mode:", mode);
+}
+
 function sendCommand(joint, action) {
+
+  // 🚫 Do not send if AUTO mode
+  if (currentMode === "auto") {
+    console.log("AUTO mode - Command not sent");
+    return;
+  }
 
   const message = JSON.stringify({
     joint: joint,
@@ -221,6 +276,7 @@ function sendCommand(joint, action) {
 
   console.log("Sent:", message);
 }
+
 
 function goToControl() {
   window.location.href = "https://manickvel.github.io/Controller/";
