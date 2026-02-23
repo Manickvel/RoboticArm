@@ -190,6 +190,14 @@ button:active {
 
 <div class="container">
 
+  <!-- New Column Added -->
+  <div class="column">
+    <h2>Depth Movement</h2>
+    <button class="plus" onclick="sendCommand('depth','plus')">+</button><br>
+    <button class="minus" onclick="sendCommand('depth','minus')">-</button>
+  </div>
+
+  <!-- Original First Column (Unchanged) -->
   <div class="column">
     <h2>Bottom</h2>
     <button class="plus" onclick="sendCommand('bottom','plus')">+</button><br>
@@ -220,11 +228,6 @@ button:active {
     <button class="minus" onclick="sendCommand('gripper','minus')">-</button>
   </div>
 
-</div>
-
-<div class="status-bar">
-  <div id="status" class="status-text">Connecting to MQTT...</div>
-  <button class="nav-btn" onclick="goToControl()">Go to Control Page</button>
 </div>
 
 <script>
@@ -288,4 +291,5 @@ function goToControl() {
 
 </body>
 </html>
+
 
