@@ -263,14 +263,20 @@ function setMode(mode) {
     document.getElementById("manualBtn").classList.add("active");
   }
 
-  console.log("Mode:", mode);
+  // 🔥 Send mode command to MQTT
+  const message = JSON.stringify({
+    mode: mode
+  });
+
+  client.publish("robotic_arm/control", message);
+  console.log("Mode Sent:", message);
 }
 
 function sendCommand(joint, action) {
 
   // 🚫 Do not send if AUTO mode
   if (currentMode === "auto") {
-    console.log("AUTO mode - Command not sent");
+     console.log("AUTO mode - Joint command blocked");
     return;
   }
 
@@ -295,6 +301,7 @@ function goToControl() {
 
 </body>
 </html>
+
 
 
 
