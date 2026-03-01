@@ -238,12 +238,7 @@ button:active {
 
 // 🔹 Change to your MQTT WebSocket broker
 const broker = "wss://broker.hivemq.com:8884/mqtt";
-const client = mqtt.connect(
-"wss://8dd2a787f223456299431cc948c7db19.s1.eu.hivemq.cloud:8884/mqtt",
-{
-username:"picodevice",
-password:"Manick4sri"
-});
+const client = mqtt.connect(broker);
 
 
 
@@ -307,6 +302,7 @@ function goToControl() {
 
 </body>
 </html>
+
 
 
 
