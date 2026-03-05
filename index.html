@@ -267,7 +267,7 @@ function setMode(mode) {
     mode: mode
   });
 
-  client.publish("robotarm/control", message);
+  client.publish("m/control", message);
   console.log("Mode Sent:", message);
 }
 
@@ -284,7 +284,7 @@ function sendCommand(joint, action) {
     action: action
   });
 
-  client.publish("robotic_arm/control", message);
+  client.publish("m/control", message);
 
   console.log("Sent:", message);
 }
@@ -300,6 +300,7 @@ function goToControl() {
 
 </body>
 </html>
+
 
 
 
