@@ -237,7 +237,7 @@ button:active {
 <script>
 
 // 🔹 Change to your MQTT WebSocket broker
- const client = mqtt.connect("wss://broker.emqx.io:8084/mqtt");
+const client = mqtt.connect("wss://broker.hivemq.com:8884/mqtt");
 
 
 client.on("connect", function () {
@@ -300,6 +300,7 @@ function goToControl() {
 
 </body>
 </html>
+
 
 
 
